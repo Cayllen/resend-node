@@ -7,8 +7,8 @@ import { Domains } from './domains/domains';
 import { Emails } from './emails/emails';
 import { CreateEmailOptions, CreateEmailResponse } from './emails/interfaces';
 
-const baseUrl = process.env.RESEND_BASE_URL || 'https://api.resend.com';
-const userAgent = process.env.RESEND_USER_AGENT || `resend-node:${version}`;
+const baseUrl = 'https://api.resend.com';
+const userAgent = `resend-node:${version}`;
 
 export class Resend {
   private readonly headers: Headers;
@@ -18,15 +18,15 @@ export class Resend {
   readonly emails = new Emails(this);
 
   constructor(readonly key?: string) {
-    if (!key) {
-      this.key = process.env.RESEND_API_KEY;
+    // if (!key) {
+    //   this.key = process.env.RESEND_API_KEY;
 
-      if (!this.key) {
-        throw new Error(
-          'Missing API key. Pass it to the constructor `new Resend("re_123")`',
-        );
-      }
-    }
+    //   if (!this.key) {
+    //     throw new Error(
+    //       'Missing API key. Pass it to the constructor `new Resend("re_123")`',
+    //     );
+    //   }
+    // }
 
     this.headers = new Headers({
       Authorization: `Bearer ${this.key}`,
